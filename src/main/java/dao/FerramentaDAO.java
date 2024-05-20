@@ -8,10 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Ferramenta;
 
-/**
- *
- * @author lucas
- */
 public class FerramentaDAO {
 
     public static ArrayList<Ferramenta> minhaLista = new ArrayList<>();
