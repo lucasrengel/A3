@@ -106,10 +106,10 @@ public class FerramentaDAO {
         Connection connection = null;//instancia da conexao
 
         try {
-
+//carregando o driver jdbc
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
-
+//configuracao do caminho do mySQL
             String server = "localhost";
             String database = "db_a3";
             String url = "jdbc:mysql://" + server + ":3306/" + database;
