@@ -15,7 +15,7 @@ Isadora Luchtenberg Fernandes
 RA:1072417018
 
 ------------------------------------------------
-Marcos Alexrande Pereira
+Marcos Alexandre Pereira
 RA:1072418239
 
 ------------------------------------------------
