@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,9 +41,69 @@ public class FerramentaDAO {
 
     }
 
+    //cadastra nova ferramenta
+    public boolean InsertFerramentaBD(Ferramenta objeto) {
+        String sql = "INSERT INTO tb_ferramentas(id,nome,marca,custo)VALUES(?,?,?,?)";
+
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, objeto.getId());
+            stmt.setString(2, objeto.getNome());
+            stmt.setString(3, objeto.getMarca());
+            stmt.setDouble(4, objeto.getCusto());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+
+        }
+    }
+
+    //deleta uma ferramenta pelo seu id
+    public boolean DeleteFerramentaBD(int id) {
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            stmt.executeUpdate("DELETE FROM tb_ferramentas WHERE id =" + id);
+
+            stmt.close();
+
+        } catch (SQLException erro) {
+        }
+        return true;
+    }
+    //edita as informacoes de uma ferramenta pelo seu id
+    public boolean UpdateFerramentaBD(Ferramenta objeto) {
+        
+        String sql = "UPDATE tb_ferramentas set nome = ? ,marca = ? ,custo = ? WHERE id = ?";
+        
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            
+            stmt.setString(1, objeto.getNome());
+            stmt.setString(2, objeto.getMarca());
+            stmt.setDouble(3, objeto.getCusto());
+            stmt.setInt(4, objeto.getId());
+            
+            stmt.execute();
+            stmt.close();
+            
+            return true;
+            
+        }catch (SQLException erro) {
+            throw new
+                RuntimeException(erro);
+        }
+    }
+
     public Connection getConexao() {
 
-        Connection connection = null;
+        Connection connection = null;//instancia da conexao
 
         try {
 
