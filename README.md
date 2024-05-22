@@ -37,9 +37,11 @@ RF010 – O sistema deve gerar relatórios de empréstimos realizados e emprést
 RF011 – O sistema deve contabilizar a quantidade de empréstimos realizado por cada um dos amigos cadastrados, de forma que mostre quem realizou mais empréstimos.
 
 ### Requisitos Não-Funcionais:
-RNF01 – O sistema deve rodar localmente no aparelho do usuário.</br>
-RNF02 – O sistema deve garantir a confidencialidade dos dados cadastrados.</br>
-RNF03 – O sistema deve ser intuitivo e direto, se adequando a qualquer usuário.
+RNF001 – O sistema deve rodar localmente no aparelho do usuário.</br>
+RNF002 – O sistema deve garantir a confidencialidade dos dados cadastrados.</br>
+RNF003 – O sistema deve ser intuitivo e direto, se adequando a qualquer usuário.
 
 ### Regras de Negócio
 RN001 – Empréstimos devem ser feitos apenas para amigos cadastrados.
+RN002 - Os dados de amigos e ferramentas não podem ser deixados em branco.
+RN003 - A quantidade em estoque de uma ferramenta deve ser um valor positivo.
