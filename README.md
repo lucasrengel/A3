@@ -42,6 +42,6 @@ RNF002 – O sistema deve garantir a confidencialidade dos dados cadastrados.</b
 RNF003 – O sistema deve ser intuitivo e direto, se adequando a qualquer usuário.
 
 ### Regras de Negócio
-RN001 – Empréstimos devem ser feitos apenas para amigos cadastrados.
-RN002 - Os dados de amigos e ferramentas não podem ser deixados em branco.
+RN001 – Empréstimos devem ser feitos apenas para amigos cadastrados</br>
+RN002 - Os dados de amigos e ferramentas não podem ser deixados em branco.</br>
 RN003 - A quantidade em estoque de uma ferramenta deve ser um valor positivo.
