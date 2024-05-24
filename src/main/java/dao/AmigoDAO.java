@@ -97,6 +97,26 @@ public class AmigoDAO {
 
     }
 
+    public Amigo carregaAmigo(int id) {
+
+        Amigo objeto = new Amigo();
+        objeto.setId(id);
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE id = " + id);
+            res.next();
+
+            objeto.setNome(res.getString("nome"));
+            objeto.setTelefone(res.getString("telefone"));
+
+            stmt.close();
+
+        } catch (SQLException erro) {
+        }
+        return objeto;
+    }
+
     //metodo para conectar com o banco de dados
     public Connection getConexao() {
 
