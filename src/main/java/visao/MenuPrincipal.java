@@ -26,6 +26,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(0, 0, 0));
+        setUndecorated(true);
+        setResizable(false);
 
         JBamigo.setBackground(new java.awt.Color(102, 153, 255));
         JBamigo.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
@@ -153,7 +155,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBamigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBamigoActionPerformed
-
+        TelaAmigo objeto = new TelaAmigo();
+        objeto.setVisible(true);
     }//GEN-LAST:event_JBamigoActionPerformed
 
     private void JBferramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBferramentaActionPerformed
