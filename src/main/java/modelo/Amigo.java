@@ -1,6 +1,7 @@
 package modelo;
 
 public class Amigo {
+
     private int id;
     private String nome;
     private String telefone;
@@ -37,6 +38,10 @@ public class Amigo {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "id: " + id + ", nome: " + nome + ", telefone: " + telefone;
+    }
+
 }
