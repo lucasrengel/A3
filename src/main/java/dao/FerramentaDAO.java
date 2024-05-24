@@ -101,6 +101,27 @@ public class FerramentaDAO {
         }
     }
 
+    public Ferramenta carregaFerramenta(int id) {
+
+        Ferramenta objeto = new Ferramenta();
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_ferramentas WHERE id = " + id);
+            res.next();
+
+            objeto.setId(id);
+            objeto.setNome(res.getString("nome"));
+            objeto.setMarca(res.getString("marca"));
+            objeto.setCusto(res.getDouble("custo"));
+
+            stmt.close();
+
+        } catch (SQLException erro) {
+        }
+        return objeto;
+    }
+
     public Connection getConexao() {
 
         Connection connection = null;//instancia da conexao
@@ -109,7 +130,7 @@ public class FerramentaDAO {
             //carregando o driver jdbc
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
-            
+
             //configuracao do caminho do mySQL
             String server = "localhost";
             String database = "db_a3";
