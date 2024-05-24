@@ -97,6 +97,7 @@ public class AmigoDAO {
 
     }
 
+    //carrega as informacoes do amigo pelo id
     public Amigo carregaAmigo(int id) {
 
         Amigo objeto = new Amigo();

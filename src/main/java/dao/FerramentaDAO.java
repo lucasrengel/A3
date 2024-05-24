@@ -100,7 +100,8 @@ public class FerramentaDAO {
             throw new RuntimeException(erro);
         }
     }
-
+    
+    //carrega as informacoes da ferramenta pelo id
     public Ferramenta carregaFerramenta(int id) {
 
         Ferramenta objeto = new Ferramenta();
