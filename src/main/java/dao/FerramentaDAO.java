@@ -77,27 +77,27 @@ public class FerramentaDAO {
         }
         return true;
     }
+
     //edita as informacoes de uma ferramenta pelo seu id
     public boolean UpdateFerramentaBD(Ferramenta objeto) {
-        
+
         String sql = "UPDATE tb_ferramentas set nome = ? ,marca = ? ,custo = ? WHERE id = ?";
-        
+
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
-            
+
             stmt.setString(1, objeto.getNome());
             stmt.setString(2, objeto.getMarca());
             stmt.setDouble(3, objeto.getCusto());
             stmt.setInt(4, objeto.getId());
-            
+
             stmt.execute();
             stmt.close();
-            
+
             return true;
-            
-        }catch (SQLException erro) {
-            throw new
-                RuntimeException(erro);
+
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
         }
     }
 
@@ -106,10 +106,11 @@ public class FerramentaDAO {
         Connection connection = null;//instancia da conexao
 
         try {
-//carregando o driver jdbc
+            //carregando o driver jdbc
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
-//configuracao do caminho do mySQL
+            
+            //configuracao do caminho do mySQL
             String server = "localhost";
             String database = "db_a3";
             String url = "jdbc:mysql://" + server + ":3306/" + database;
