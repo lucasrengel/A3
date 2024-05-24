@@ -1,6 +1,7 @@
 package modelo;
 
 public class Ferramenta {
+
     private int id;
     private String nome;
     private String marca;
@@ -47,6 +48,10 @@ public class Ferramenta {
     public void setCusto(double custo) {
         this.custo = custo;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "id: " + id + ", nome: " + nome + ", marca: " + marca + ", custo: " + custo;
+    }
+
 }
