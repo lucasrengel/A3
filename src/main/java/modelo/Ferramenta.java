@@ -10,6 +10,13 @@ public class Ferramenta {
     public Ferramenta() {
     }
 
+    //construtor sem id por causa do auto incremental no mysql
+    public Ferramenta(String nome, String marca, double custo) {
+        this.nome = nome;
+        this.marca = marca;
+        this.custo = custo;
+    }
+    
     public Ferramenta(int id, String nome, String marca, double custo) {
         this.id = id;
         this.nome = nome;
