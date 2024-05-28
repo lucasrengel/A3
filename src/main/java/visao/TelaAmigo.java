@@ -5,7 +5,11 @@
 package visao;
 
 import dao.AmigoDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 
@@ -24,23 +28,26 @@ public class TelaAmigo extends javax.swing.JFrame {
     public TelaAmigo() {
         initComponents();
         this.objetoamigo = new AmigoDAO();
+        carregaTabela();
     }
-    
-    
+
     public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
-        modelo.setNumRows(0); 
-        
+        modelo.setNumRows(0);
+
         ArrayList<Amigo> minhalista = objetoamigo.getMinhaLista();
         minhalista = objetoamigo.getMinhaLista();
-        
+
         for (Amigo amigo : minhalista) {
             modelo.addRow(new Object[]{
                 amigo.getId(),
                 amigo.getNome(),
-                amigo.getTelefone(),
-            });
+                amigo.getTelefone(),});
         }
+    }
+
+    public ArrayList<String> getListaAmigos() {
+        return this.objetoamigo.getMinhaLista();
     }
 
     /**
@@ -268,11 +275,73 @@ public class TelaAmigo extends javax.swing.JFrame {
     }//GEN-LAST:event_JPmenuMousePressed
 
     private void JBapagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBapagarActionPerformed
-
+        try {
+            // validando dados da interface gráfica.
+            int id = 0;
+            if (this.jTableAmigo.getSelectedRow() == -1) {
+                throw new Mensagens(
+                        "Primeiro Selecione um Amigo para APAGAR");
+            } else {
+                id = Integer.parseInt(this.jTableAmigo.
+                        getValueAt(this.jTableAmigo.getSelectedRow(), 0).
+                        toString());
+            }
+            // retorna 0 -> primeiro botão | 1 -> segundo botão | 2 -> terceiro botão
+            int respostaUsuario = JOptionPane.
+                    showConfirmDialog(null,
+                            "Tem certeza que deseja apagar este Amigo ?");
+            if (respostaUsuario == 0) {// clicou em SIM
+                // envia os dados para o Amigo processar
+                if (this.objetoamigo.DeleteAmigoBD(id)) {
+                    // limpa os campos
+                    this.JTFnome.setText("");
+                    this.JTFtelefone.setText("");
+                    JOptionPane.showMessageDialog(rootPane,
+                            "Amigo apagado com sucesso!");
+                }
+            }
+            // atualiza a tabela.
+            System.out.println(this.objetoamigo.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } finally {
+            // atualiza a tabela.
+            carregaTabela();
+        }
     }//GEN-LAST:event_JBapagarActionPerformed
 
     private void JBcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBcadastrarActionPerformed
-
+        try {
+            // recebendo e validando dados da interface gráfica.
+            String nome = "";
+            String telefone = "";
+            if (this.JTFnome.getText().length() < 2) {
+                throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
+            } else {
+                nome = this.JTFnome.getText();
+            }
+            if (this.JTFtelefone.getText().length() <= 0) {
+                throw new Mensagens("Telefone deve conter ao menos 2 caracteres.");
+            } else {
+                telefone = this.JTFtelefone.getText();
+            }
+            Amigo amigo = new Amigo(nome, telefone);
+            
+            // envia os dados para o Controlador cadastrar
+            if (this.objetoamigo.InsertAmigoBD(amigo)) {
+                JOptionPane.showMessageDialog(rootPane, "Amigo Cadastrado com Sucesso!");
+                this.JTFnome.setText("");
+                this.JTFtelefone.setText("");
+            }
+            //Exibi no console o amigo cadastrado
+            System.out.println(this.objetoamigo.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um n�mero.");
+        }finally {
+            carregaTabela(); // atualiza a tabela.
+        }
     }//GEN-LAST:event_JBcadastrarActionPerformed
 
     private void jTableAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigoMouseClicked
@@ -280,7 +349,47 @@ public class TelaAmigo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableAmigoMouseClicked
 
     private void JBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBalterarActionPerformed
+        try {
+            // recebendo e validando dados da interface gr�fica.
+            int id = 0;
+            String nome = "";
+            String telefone = "";
 
+            if (this.JTFnome.getText().length() < 2) {
+                throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
+            } else {
+                nome = this.JTFnome.getText();
+            }
+
+            if (this.JTFtelefone.getText().length() <= 0) {
+                throw new Mensagens("Telefone deve conter ao menos 2 caracteres.");
+            } else {
+                telefone = this.JTFtelefone.getText();
+            }
+            if (this.jTableAmigo.getSelectedRow() == -1) {
+                throw new Mensagens("Primeiro Selecione um Amigo para Alterar");
+            } else {
+                id = Integer.parseInt(this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 0).toString());
+            }
+            Amigo amigo = new Amigo(id, nome, telefone);
+
+            // envia os dados para o Amigo processar
+            if (this.objetoamigo.UpdateAmigoBD(amigo)) {
+
+                // limpa os campos
+                this.JTFnome.setText("");
+                this.JTFtelefone.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Amigo Alterado com Sucesso!");
+
+            }
+            System.out.println(this.objetoamigo.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um n�mero.");
+        } finally {
+            carregaTabela(); // atualiza a tabela.
+        }
     }//GEN-LAST:event_JBalterarActionPerformed
 
     /**
