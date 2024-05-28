@@ -326,7 +326,7 @@ public class TelaAmigo extends javax.swing.JFrame {
                 telefone = this.JTFtelefone.getText();
             }
             Amigo amigo = new Amigo(nome, telefone);
-            
+
             // envia os dados para o Controlador cadastrar
             if (this.objetoamigo.InsertAmigoBD(amigo)) {
                 JOptionPane.showMessageDialog(rootPane, "Amigo Cadastrado com Sucesso!");
@@ -339,13 +339,19 @@ public class TelaAmigo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um n�mero.");
-        }finally {
+        } finally {
             carregaTabela(); // atualiza a tabela.
         }
     }//GEN-LAST:event_JBcadastrarActionPerformed
 
     private void jTableAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigoMouseClicked
+        if (this.jTableAmigo.getSelectedRow() != -1) {
+            String nome = this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 1).toString();
+            String telefone = this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 2).toString();
 
+            this.JTFnome.setText(nome);
+            this.JTFtelefone.setText(telefone);
+        }
     }//GEN-LAST:event_jTableAmigoMouseClicked
 
     private void JBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBalterarActionPerformed
