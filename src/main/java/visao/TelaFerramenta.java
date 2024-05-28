@@ -4,6 +4,11 @@
  */
 package visao;
 
+import dao.FerramentaDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import modelo.Ferramenta;
+
 /**
  *
  * @author lucas
@@ -14,9 +19,29 @@ public class TelaFerramenta extends javax.swing.JFrame {
      * Creates new form TelaFerramenta
      */
     private int xMouse, yMouse;
-    
+
+    private FerramentaDAO objetoferramenta;
+
     public TelaFerramenta() {
         initComponents();
+        this.objetoferramenta = new FerramentaDAO();
+    }
+    
+    public void carregaTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) this.jTableFerramenta.getModel();
+        modelo.setNumRows(0); 
+        
+        ArrayList<Ferramenta> minhalista;
+        minhalista = objetoferramenta.getMinhaLista();
+        
+        for (Ferramenta ferramenta : minhalista) {
+            modelo.addRow(new Object[]{
+                ferramenta.getId(),
+                ferramenta.getNome(),
+                ferramenta.getMarca(),
+                ferramenta.getCusto(),
+            });
+        }
     }
 
     /**
@@ -267,7 +292,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
     }//GEN-LAST:event_JBapagarActionPerformed
 
     private void JBcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBcadastrarActionPerformed
-        
+
     }//GEN-LAST:event_JBcadastrarActionPerformed
 
     private void JTFcustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFcustoActionPerformed
