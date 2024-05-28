@@ -325,10 +325,9 @@ public class TelaAmigo extends javax.swing.JFrame {
             } else {
                 telefone = this.JTFtelefone.getText();
             }
-            Amigo amigo = new Amigo(nome, telefone);
 
             // envia os dados para o Controlador cadastrar
-            if (this.objetoamigo.InsertAmigoBD(amigo)) {
+            if (this.objetoamigo.InsertAmigoBD(new Amigo(nome, telefone))) {
                 JOptionPane.showMessageDialog(rootPane, "Amigo Cadastrado com Sucesso!");
                 this.JTFnome.setText("");
                 this.JTFtelefone.setText("");
@@ -377,10 +376,9 @@ public class TelaAmigo extends javax.swing.JFrame {
             } else {
                 id = Integer.parseInt(this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 0).toString());
             }
-            Amigo amigo = new Amigo(id, nome, telefone);
 
             // envia os dados para o Amigo processar
-            if (this.objetoamigo.UpdateAmigoBD(amigo)) {
+            if (this.objetoamigo.UpdateAmigoBD(new Amigo(id, nome, telefone))) {
 
                 // limpa os campos
                 this.JTFnome.setText("");
