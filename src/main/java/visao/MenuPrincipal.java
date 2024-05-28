@@ -160,11 +160,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_JBamigoActionPerformed
 
     private void JBferramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBferramentaActionPerformed
-
+        TelaFerramenta objeto = new TelaFerramenta();
+        objeto.setVisible(true);
     }//GEN-LAST:event_JBferramentaActionPerformed
 
     private void JBemprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBemprestimoActionPerformed
-
+        TelaEmprestimo objeto = new TelaEmprestimo();
+        objeto.setVisible(true);
     }//GEN-LAST:event_JBemprestimoActionPerformed
 
     private void JBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsairActionPerformed
