@@ -29,6 +29,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
     public TelaFerramenta() {
         initComponents();
         this.objetoferramenta = new FerramentaDAO();
+        carregaTabela();
     }
 
     public void carregaTabela() {
@@ -73,6 +74,8 @@ public class TelaFerramenta extends javax.swing.JFrame {
         jTableFerramenta = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         JPmenu.setBackground(new java.awt.Color(102, 153, 255));
         JPmenu.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -268,6 +271,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsairActionPerformed
@@ -317,10 +321,8 @@ public class TelaFerramenta extends javax.swing.JFrame {
             } else {
                 id = Integer.parseInt(this.jTableFerramenta.getValueAt(this.jTableFerramenta.getSelectedRow(), 0).toString());
             }
-            
-            Ferramenta objeto = new Ferramenta(id, nome, marca, custo);
 
-            if (this.objetoferramenta.UpdateFerramentaBD(objeto)) {
+            if (this.objetoferramenta.UpdateFerramentaBD(new Ferramenta(id, nome, marca, custo))) {
 
                 // limpa os campos
                 this.JTFnome.setText("");
@@ -397,10 +399,8 @@ public class TelaFerramenta extends javax.swing.JFrame {
             } else {
                 custo = Double.parseDouble(this.JTFcusto.getText());
             }
-
-            Ferramenta objeto = new Ferramenta(nome, marca, custo);
             // envia os dados para o Controlador cadastrar
-            if (this.objetoferramenta.InsertFerramentaBD(objeto)) {
+            if (this.objetoferramenta.InsertFerramentaBD(new Ferramenta(nome, marca, custo))) {
                 JOptionPane.showMessageDialog(rootPane, "Ferramenta Cadastrado com Sucesso!");
                 this.JTFnome.setText("");
                 this.JTFmarca.setText("");
@@ -422,7 +422,15 @@ public class TelaFerramenta extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFcustoActionPerformed
 
     private void jTableFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFerramentaMouseClicked
+        if (this.jTableFerramenta.getSelectedRow() != -1) {
+            String nome = this.jTableFerramenta.getValueAt(this.jTableFerramenta.getSelectedRow(), 1).toString();
+            String marca = this.jTableFerramenta.getValueAt(this.jTableFerramenta.getSelectedRow(), 2).toString();
+            String custo = this.jTableFerramenta.getValueAt(this.jTableFerramenta.getSelectedRow(), 3).toString();
 
+            this.JTFnome.setText(nome);
+            this.JTFmarca.setText(marca);
+            this.JTFcusto.setText(custo);
+        }
     }//GEN-LAST:event_jTableFerramentaMouseClicked
 
     /**
