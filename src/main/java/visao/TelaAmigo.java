@@ -4,6 +4,11 @@
  */
 package visao;
 
+import dao.AmigoDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import modelo.Amigo;
+
 /**
  *
  * @author lucas
@@ -14,9 +19,28 @@ public class TelaAmigo extends javax.swing.JFrame {
      * Creates new form TelaAmigo
      */
     private int xMouse, yMouse;
+    private AmigoDAO objetoamigo;
 
     public TelaAmigo() {
         initComponents();
+        this.objetoamigo = new AmigoDAO();
+    }
+    
+    
+    public void carregaTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
+        modelo.setNumRows(0); 
+        
+        ArrayList<Amigo> minhalista = objetoamigo.getMinhaLista();
+        minhalista = objetoamigo.getMinhaLista();
+        
+        for (Amigo amigo : minhalista) {
+            modelo.addRow(new Object[]{
+                amigo.getId(),
+                amigo.getNome(),
+                amigo.getTelefone(),
+            });
+        }
     }
 
     /**
@@ -184,7 +208,7 @@ public class TelaAmigo extends javax.swing.JFrame {
                             .addGap(42, 42, 42)
                             .addComponent(JTFnome, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
