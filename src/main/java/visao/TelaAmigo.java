@@ -35,7 +35,7 @@ public class TelaAmigo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
         modelo.setNumRows(0);
 
-        ArrayList<Amigo> minhalista = objetoamigo.getMinhaLista();
+        ArrayList<Amigo> minhalista;
         minhalista = objetoamigo.getMinhaLista();
 
         for (Amigo amigo : minhalista) {
