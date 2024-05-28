@@ -8,6 +8,12 @@ public class Amigo {
 
     public Amigo() {
     }
+    
+    //construtor sem id por causa do auto incremental
+    public Amigo(String nome, String telefone){
+        this.nome = nome;
+        this.telefone = telefone;
+    }
 
     public Amigo(int id, String nome, String telefone) {
         this.id = id;
