@@ -4,10 +4,18 @@
  */
 package modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author lucas
  */
 public class Emprestimo {
+
+    private int id;
+    private Amigo idAmigo;
+    private Ferramenta idFerramenta;
+    private Date dataEmprestimo;
+    private Date dataDevolucao;
     
 }
