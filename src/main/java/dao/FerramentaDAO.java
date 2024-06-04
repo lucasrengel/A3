@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class FerramentaDAO {
     }
 
     //cadastra nova ferramenta
-    public boolean InsertFerramentaBD(Ferramenta objeto) {
+    public boolean insertFerramentaBD(Ferramenta objeto) {
         String sql = "INSERT INTO tb_ferramentas(id,nome,marca,custo)VALUES(?,?,?,?)";
 
         try {
@@ -65,7 +64,7 @@ public class FerramentaDAO {
     }
 
     //deleta uma ferramenta pelo seu id
-    public boolean DeleteFerramentaBD(int id) {
+    public boolean deleteFerramentaBD(int id) {
 
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -79,7 +78,7 @@ public class FerramentaDAO {
     }
 
     //edita as informacoes de uma ferramenta pelo seu id
-    public boolean UpdateFerramentaBD(Ferramenta objeto) {
+    public boolean updateFerramentaBD(Ferramenta objeto) {
 
         String sql = "UPDATE tb_ferramentas set nome = ? ,marca = ? ,custo = ? WHERE id = ?";
 

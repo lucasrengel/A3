@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +40,7 @@ public class AmigoDAO {
     }
 
     //cadastra um novo amigo
-    public boolean InsertAmigoBD(Amigo objeto) {
+    public boolean insertAmigoBD(Amigo objeto) {
         String sql = "INSERT INTO tb_amigos(id,nome,telefone) VALUES(?,?,?)";
 
         try {
@@ -62,7 +61,7 @@ public class AmigoDAO {
     }
 
     //deleta um amigo pelo seu id
-    public boolean DeleteAmigoBD(int id) {
+    public boolean deleteAmigoBD(int id) {
         try {
             Statement stmt = this.getConexao().createStatement();
             stmt.executeUpdate("DELETE FROM tb_amigos WHERE id = " + id);
@@ -75,7 +74,7 @@ public class AmigoDAO {
     }
 
     //atualiza um amigo pelo seu id
-    public boolean UpdateAmigoBD(Amigo objeto) {
+    public boolean updateAmigoBD(Amigo objeto) {
 
         String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? WHERE id = ?";
 

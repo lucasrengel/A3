@@ -1,10 +1,7 @@
 package visao;
 
 import dao.FerramentaDAO;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ferramenta;
@@ -306,7 +303,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
                 id = Integer.parseInt(this.jTableFerramenta.getValueAt(this.jTableFerramenta.getSelectedRow(), 0).toString());
             }
 
-            if (this.objetoferramenta.UpdateFerramentaBD(new Ferramenta(id, nome, marca, custo))) {
+            if (this.objetoferramenta.updateFerramentaBD(new Ferramenta(id, nome, marca, custo))) {
 
                 // limpa os campos
                 this.JTFnome.setText("");
@@ -343,7 +340,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
                             "Tem certeza que deseja apagar esta Ferramenta ?");
             if (respostaUsuario == 0) {// clicou em SIM
                 // envia os dados para a Ferramenta processar
-                if (this.objetoferramenta.DeleteFerramentaBD(id)) {
+                if (this.objetoferramenta.deleteFerramentaBD(id)) {
                     // limpa os campos
                     this.JTFnome.setText("");
                     this.JTFmarca.setText("");
@@ -384,7 +381,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
                 custo = Double.parseDouble(this.JTFcusto.getText());
             }
             // envia os dados para o Controlador cadastrar
-            if (this.objetoferramenta.InsertFerramentaBD(new Ferramenta(nome, marca, custo))) {
+            if (this.objetoferramenta.insertFerramentaBD(new Ferramenta(nome, marca, custo))) {
                 JOptionPane.showMessageDialog(rootPane, "Ferramenta Cadastrado com Sucesso!");
                 this.JTFnome.setText("");
                 this.JTFmarca.setText("");

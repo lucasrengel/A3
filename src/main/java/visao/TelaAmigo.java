@@ -1,10 +1,7 @@
 package visao;
 
 import dao.AmigoDAO;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
@@ -276,7 +273,7 @@ public class TelaAmigo extends javax.swing.JFrame {
                             "Tem certeza que deseja apagar este Amigo ?");
             if (respostaUsuario == 0) {// clicou em SIM
                 // envia os dados para o Amigo processar
-                if (this.objetoamigo.DeleteAmigoBD(id)) {
+                if (this.objetoamigo.deleteAmigoBD(id)) {
                     // limpa os campos
                     this.JTFnome.setText("");
                     this.JTFtelefone.setText("");
@@ -311,7 +308,7 @@ public class TelaAmigo extends javax.swing.JFrame {
             }
 
             // envia os dados para o Controlador cadastrar
-            if (this.objetoamigo.InsertAmigoBD(new Amigo(nome, telefone))) {
+            if (this.objetoamigo.insertAmigoBD(new Amigo(nome, telefone))) {
                 JOptionPane.showMessageDialog(rootPane, "Amigo Cadastrado com Sucesso!");
                 this.JTFnome.setText("");
                 this.JTFtelefone.setText("");
@@ -362,7 +359,7 @@ public class TelaAmigo extends javax.swing.JFrame {
             }
 
             // envia os dados para o Amigo processar
-            if (this.objetoamigo.UpdateAmigoBD(new Amigo(id, nome, telefone))) {
+            if (this.objetoamigo.updateAmigoBD(new Amigo(id, nome, telefone))) {
 
                 // limpa os campos
                 this.JTFnome.setText("");
