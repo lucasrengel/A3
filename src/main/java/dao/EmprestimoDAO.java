@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import modelo.Amigo;
 import modelo.Emprestimo;
@@ -16,11 +15,11 @@ public class EmprestimoDAO {
     //transforma os IDs em objetos
     AmigoDAO amigoDAO = new AmigoDAO();
     FerramentaDAO ferramentaDAO = new FerramentaDAO();
-    public static ArrayList<Emprestimo> MinhaLista = new ArrayList<>();
+    public static ArrayList<Emprestimo> minhaLista = new ArrayList<>();
 
     public ArrayList getMinhaLista() {
 
-        MinhaLista.clear();
+        minhaLista.clear();
 
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -35,7 +34,7 @@ public class EmprestimoDAO {
 
                 Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataEmprestimo, dataDevolucao);
 
-                MinhaLista.add(objeto);
+                minhaLista.add(objeto);
             }
 
             stmt.close();
@@ -49,7 +48,7 @@ public class EmprestimoDAO {
             }
         }
 
-        return MinhaLista;
+        return minhaLista;
     }
 
     public void registrarEmprestimo(Emprestimo emprestimo) {
