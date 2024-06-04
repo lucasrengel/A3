@@ -26,7 +26,7 @@ public class EmprestimoDAO {
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos");
 
             while (res.next()) {
-                int id = res.getInt("id_emprestimo");
+                int id = res.getInt("id");
                 Amigo amigo = amigoDAO.carregaAmigo(res.getInt("id_amigo"));
                 Ferramenta ferramenta = ferramentaDAO.carregaFerramenta(res.getInt("id_ferramenta"));
                 java.sql.Date dataEmprestimo = res.getDate("data_emprestimo");
