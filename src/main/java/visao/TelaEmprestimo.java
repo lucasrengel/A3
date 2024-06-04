@@ -3,9 +3,13 @@ package visao;
 import dao.AmigoDAO;
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 import modelo.Emprestimo;
@@ -20,6 +24,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     public TelaEmprestimo() {
         initComponents();
+        this.objetoamigo = new AmigoDAO();
+        this.objetoferramenta = new FerramentaDAO();
         this.objetoemprestimo = new EmprestimoDAO();
         carregaAmigos();
         carregaFerramentas();
@@ -86,6 +92,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         JTFdevolucao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         JPmenu.setBackground(new java.awt.Color(102, 153, 255));
         JPmenu.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -139,7 +147,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addGap(106, 106, 106))
         );
 
-        jPanel1.setBackground(new java.awt.Color(204, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel1.setText("Amigos:");
@@ -159,11 +167,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             public Ferramenta getElementAt(int i) { return listaFerramentas.get(i); }
         }
     );
-    jListFerramentas.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jListFerramentasMouseClicked(evt);
-        }
-    });
     jScrollPane1.setViewportView(jListFerramentas);
 
     java.util.List<Amigo> listaAmigos = new java.util.ArrayList<>();
@@ -192,10 +195,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             {null, null, null, null, null},
             {null, null, null, null, null},
             {null, null, null, null, null},
+            {null, null, null, null, null},
             {null, null, null, null, null}
         },
         new String [] {
-            "ID", "Nome amigo", "Nome ferramenta", "Data", "Data devolução"
+            "ID", "Amigo", "Ferramenta", "Data", "Data devolução"
         }
     ));
     jTableEmprestimos.setToolTipText("");
@@ -220,6 +224,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     JBapagar.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
     JBapagar.setForeground(new java.awt.Color(255, 255, 255));
     JBapagar.setText("Apagar");
+    JBapagar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            JBapagarActionPerformed(evt);
+        }
+    });
 
     jLabel3.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
     jLabel3.setText("Data:");
@@ -357,6 +366,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     );
 
     pack();
+    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBsair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsair1ActionPerformed
@@ -375,20 +385,90 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_JPmenuMousePressed
 
-    private void jListFerramentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFerramentasMouseClicked
-
-    }//GEN-LAST:event_jListFerramentasMouseClicked
-
     private void JBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBregistrarActionPerformed
+        try {
+            Amigo amigo = (Amigo) jComboBoxAmigos.getSelectedItem();
+            Ferramenta ferramenta = jListFerramentas.getSelectedValue();
+            Date dataEmprestimo = Date.valueOf(LocalDate.now());
+            Date dataDevolucao = null;
 
+            // Verifica se um amigo e uma ferramenta foram selecionados
+            if (amigo == null || ferramenta == null) {
+                throw new Mensagens("Selecione um amigo e uma ferramenta para registrar o empréstimo.");
+            }
+
+            // Cria um novo objeto de empréstimo com os valores selecionados
+            Emprestimo novoEmprestimo = new Emprestimo(amigo, ferramenta, dataEmprestimo, dataDevolucao);
+
+            // Chama o método do DAO para registrar o empréstimo
+            objetoemprestimo.registrarEmprestimo(novoEmprestimo);
+
+            // Atualiza a tabela com os novos dados
+            carregaTabela();
+
+
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } finally {
+            carregaTabela();
+        }
     }//GEN-LAST:event_JBregistrarActionPerformed
 
     private void jTableEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmprestimosMouseClicked
+        if (this.jTableEmprestimos.getSelectedRow() != -1) {
+            String id_amigo = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 1).toString();
+            String id_ferramenta = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 2).toString();
+            String data = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 3).toString();
 
+            this.JTFamigo.setText(id_amigo);
+            this.JTFferramenta.setText(id_ferramenta);
+            this.JTFdata.setText(data);
+        }
     }//GEN-LAST:event_jTableEmprestimosMouseClicked
 
     private void JBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBalterarActionPerformed
+        try {
 
+            int id = 0;
+            int idAmigo = 0;
+            int idFerramenta = 0;
+            String s = "devolvido";
+            Date dataEmprestimo;
+            Date dataDevolucao = Date.valueOf(s);
+
+            if (this.jTableEmprestimos.getSelectedRow() == -1) {
+                throw new Mensagens("Primeiro, selecione um empréstimo para editar.");
+            } else {
+                id = Integer.parseInt(this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 0).toString());
+            }
+
+            if (Integer.parseInt(this.JTFamigo.getText()) < 0 || Integer.parseInt(this.JTFferramenta.getText()) < 0) {
+                throw new Mensagens("ID deve ser um número positivo.");
+            } else {
+                idAmigo = Integer.parseInt(this.JTFamigo.getText());
+                idFerramenta = Integer.parseInt(this.JTFferramenta.getText());
+            }
+
+            if (this.JTFdata.getText().contains("_")) {
+                throw new Mensagens("Insira uma data de empréstimo válida.");
+            } else {
+                dataEmprestimo = Date.valueOf(LocalDate.now());;
+            }
+
+            if (!this.JTFdevolucao.getText().contains("_")) {
+                Date.valueOf(s);
+                if (dataEmprestimo.getTime() > dataDevolucao.getTime()) {
+                    throw new Mensagens("Data de empréstimo se encontra após data de devolução.");
+                }
+            }
+
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "Favor, informe os IDs necessários para alteração.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } finally {
+            carregaTabela();
+        }
     }//GEN-LAST:event_JBalterarActionPerformed
 
     private void JTFdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFdataActionPerformed
@@ -398,6 +478,31 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private void JTFdevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFdevolucaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFdevolucaoActionPerformed
+
+    private void JBapagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBapagarActionPerformed
+                
+        try {
+            int id = 0;
+            int idAmigo = 0;
+            
+            if(this.jTableEmprestimos.getSelectedRow() == -1) {
+                throw new Mensagens("Primeiro, selecione um empréstimo para remover");
+            } else {
+                id = Integer.parseInt(this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 0).toString());
+                idAmigo = objetoemprestimo.carregaEmprestimo(id).getIdAmigo().getId();
+            }
+            
+            int resposta = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja remover este empréstimo?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if(resposta == JOptionPane.YES_OPTION && this.objetoemprestimo.deleteEmprestimoBD(id)) {
+                JOptionPane.showMessageDialog(rootPane, "Empréstimo removido com sucesso!");
+            }
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+        } finally {
+            carregaTabela();
+        }
+    }//GEN-LAST:event_JBapagarActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
