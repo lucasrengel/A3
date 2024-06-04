@@ -16,7 +16,7 @@ public class Ferramenta {
         this.marca = marca;
         this.custo = custo;
     }
-    
+
     public Ferramenta(int id, String nome, String marca, double custo) {
         this.id = id;
         this.nome = nome;
