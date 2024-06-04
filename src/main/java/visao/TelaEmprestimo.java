@@ -1,14 +1,61 @@
 package visao;
 
+import dao.AmigoDAO;
+import dao.EmprestimoDAO;
+import dao.FerramentaDAO;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
+import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 public class TelaEmprestimo extends javax.swing.JFrame {
 
     int xMouse, yMouse;
-    
+    private AmigoDAO objetoamigo;
+    private FerramentaDAO objetoferramenta;
+    private EmprestimoDAO objetoemprestimo;
+
     public TelaEmprestimo() {
         initComponents();
+        this.objetoemprestimo = new EmprestimoDAO();
+        carregaAmigos();
+        carregaFerramentas();
+        carregaTabela();
+    }
+
+    private void carregaAmigos() {
+        ArrayList<Amigo> amigos = objetoamigo.getMinhaLista();
+        DefaultComboBoxModel model = new DefaultComboBoxModel(amigos.toArray());
+        jComboBoxAmigos.setModel(model);
+    }
+
+    private void carregaFerramentas() {
+        ArrayList<Ferramenta> ferramentas = objetoferramenta.getMinhaLista();
+        DefaultListModel model = new DefaultListModel();
+        for (Ferramenta ferramenta : ferramentas) {
+            model.addElement(ferramenta);
+        }
+        jListFerramentas.setModel(model);
+    }
+
+    public void carregaTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) this.jTableEmprestimos.getModel();
+        modelo.setNumRows(0);
+
+        ArrayList<Emprestimo> minhalista = objetoemprestimo.getMinhaLista();
+
+        for (Emprestimo e : minhalista) {
+
+            modelo.addRow(new Object[]{
+                e.getId(),
+                e.getIdAmigo(),
+                e.getIdFerramenta(),
+                e.getDataEmprestimo(),
+                e.getDataDevolucao(),});
+        }
     }
 
     @SuppressWarnings("unchecked")
