@@ -1,19 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import modelo.Amigo;
 import modelo.Emprestimo;
+import modelo.Ferramenta;
 
-/**
- *
- * @author lucas
- */
 public class EmprestimoDAO {
 
     //transforma os IDs em objetos
@@ -21,41 +17,41 @@ public class EmprestimoDAO {
     FerramentaDAO ferramentaDAO = new FerramentaDAO();
     public static ArrayList<Emprestimo> MinhaLista = new ArrayList<>();
 
-    public Connection getConexao() {
+    public ArrayList getMinhaLista() {
 
-        Connection connection = null;//instancia da conexao
+        MinhaLista.clear();
 
         try {
-            //carregando o driver jdbc
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos");
 
-            //configuracao do caminho do mySQL
-            String server = "localhost";
-            String database = "db_a3";
-            String url = "jdbc:mysql://" + server + ":3306/" + database;
-            String user = "root";
-            String password = "1234";
+            while (res.next()) {
+                int id = res.getInt("id_emprestimo");
+                Amigo amigo = amigoDAO.carregaAmigo(res.getInt("id_amigo"));
+                Ferramenta ferramenta = ferramentaDAO.carregaFerramenta(res.getInt("id_ferramenta"));
+                java.sql.Date dataEmprestimo = res.getDate("data_emprestimo");
+                java.sql.Date dataDevolucao = res.getDate("data_devolucao");
 
-            connection = DriverManager.getConnection(url, user, password);
+                Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataEmprestimo, dataDevolucao);
 
-            // Testando..
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: NAO CONECTADO!");
+                MinhaLista.add(objeto);
             }
 
-            return connection;
-
-        } catch (ClassNotFoundException e) {  //Driver nao encontrado
-            System.out.println("O driver nao foi encontrado. " + e.getMessage());
-            return null;
+            stmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-            return null;
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                this.getConexao().close();
+            } catch (SQLException e) {
+            }
         }
 
+        return MinhaLista;
+    }
+
+    private Connection getConexao() {
+        return Conexao.getConexao();
     }
 }
