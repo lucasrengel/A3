@@ -13,6 +13,13 @@ public class Emprestimo {
     public Emprestimo() {
     }
 
+    public Emprestimo(Amigo idAmigo, Ferramenta idFerramenta, Date dataEmprestimo, Date dataDevolucao) {
+        this.idAmigo = idAmigo;
+        this.idFerramenta = idFerramenta;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
+    }
+
     public Emprestimo(int id, Amigo idAmigo, Ferramenta idFerramenta, Date dataEmprestimo, Date dataDevolucao) {
         this.id = id;
         this.idAmigo = idAmigo;
