@@ -375,7 +375,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
             } else {
                 marca = this.JTFmarca.getText();
             }
-            if (Integer.parseInt(this.JTFcusto.getText()) < 0) {
+            if (this.JTFcusto.getText().length() < 0) {
                 throw new Mensagens("Custo deve ser número e maior que zero.");
             } else {
                 custo = Double.parseDouble(this.JTFcusto.getText());
