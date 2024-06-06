@@ -35,9 +35,10 @@ RF008 - O sistema deve integrar o cadastro dos amigos com o google, de forma que
 
 ### Requisitos Não-Funcionais:
 RNF001 - Linguagem de Desenvolvimento: O sistema deve ser desenvolvido na linguagem de programação Java.</br>
-RNF002 - Sistema Operacional: O ambiente de desenvolvimento deve utilizar Windows 10 ou 11.</br>
-RNF003 – Localização: O sistema deve rodar localmente no aparelho do usuário.</br>
-RNF004 – Segurança: O sistema deve garantir a confidencialidade dos dados cadastrados.
+RNF002 - Versões: O sistema deve ser desenvolvido utilizando Java 21 ou superior e MySQL Workbench 8.0 ou superior.</br>
+RNF003 - Sistema Operacional: O ambiente de desenvolvimento deve utilizar Windows 10 ou 11.</br>
+RNF004 – Localização: O sistema deve rodar localmente no aparelho do usuário.</br>
+RNF005 – Segurança: O sistema deve garantir a confidencialidade dos dados cadastrados.
 
 ### Regras de Negócio
 RN001 – Empréstimos devem ser feitos apenas para amigos cadastrados</br>
