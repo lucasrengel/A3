@@ -5,12 +5,13 @@ public class Amigo {
     private int id;
     private String nome;
     private String telefone;
+    private int totalEmprestimos;
 
     public Amigo() {
     }
-    
+
     //construtor sem id por causa do auto incremental
-    public Amigo(String nome, String telefone){
+    public Amigo(String nome, String telefone) {
         this.nome = nome;
         this.telefone = telefone;
     }
@@ -45,9 +46,17 @@ public class Amigo {
         this.telefone = telefone;
     }
 
+    public int getTotalEmprestimos() {
+        return totalEmprestimos;
+    }
+
+    public void setTotalEmprestimos(int totalEmprestimos) {
+        this.totalEmprestimos = totalEmprestimos;
+    }
+
     @Override
     public String toString() {
-        return nome;
+        return "id: " + id + ", nome: " + nome;
     }
 
 }
