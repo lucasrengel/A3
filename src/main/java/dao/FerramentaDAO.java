@@ -11,6 +11,7 @@ import modelo.Ferramenta;
 public class FerramentaDAO {
 
     public static ArrayList<Ferramenta> minhaLista = new ArrayList<>();
+    double custoTotal;
 
     public ArrayList getMinhaLista() {
 
@@ -98,6 +99,29 @@ public class FerramentaDAO {
         } catch (SQLException erro) {
             throw new RuntimeException(erro);
         }
+    }
+
+    public double getTotal() {
+        ResultSet res;
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            res = stmt.executeQuery("SELECT SUM(custo) FROM tb_ferramentas");
+            if (res.next()) {
+                custoTotal = res.getDouble("SUM(custo)");
+            }
+            stmt.close();
+
+        } catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        } finally {
+            try {
+                this.getConexao().close();
+            } catch (Exception e) {
+            }
+        }
+
+        return custoTotal;
     }
 
     //carrega as informacoes da ferramenta pelo id
