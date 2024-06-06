@@ -58,7 +58,7 @@ public class Ferramenta {
 
     @Override
     public String toString() {
-        return "id: " + id + ", nome: " + nome + ", marca: " + marca + ", custo: " + custo;
+        return nome;
     }
 
 }
