@@ -27,25 +27,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         this.objetoamigo = new AmigoDAO();
         this.objetoferramenta = new FerramentaDAO();
         this.objetoemprestimo = new EmprestimoDAO();
-        carregaAmigos();
-        carregaFerramentas();
+
         carregaTabela();
     }
 
-    private void carregaAmigos() {
-        ArrayList<Amigo> amigos = objetoamigo.getMinhaLista();
-        DefaultComboBoxModel model = new DefaultComboBoxModel(amigos.toArray());
-        jComboBoxAmigos.setModel(model);
-    }
 
-    private void carregaFerramentas() {
-        ArrayList<Ferramenta> ferramentas = objetoferramenta.getMinhaLista();
-        DefaultListModel model = new DefaultListModel();
-        for (Ferramenta ferramenta : ferramentas) {
-            model.addElement(ferramenta);
-        }
-        jListFerramentas.setModel(model);
-    }
 
     public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableEmprestimos.getModel();
@@ -72,11 +58,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         JBsair1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListFerramentas = new javax.swing.JList<>();
-        jComboBoxAmigos = new javax.swing.JComboBox<>();
         JBregistrar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEmprestimos = new javax.swing.JTable();
@@ -147,226 +128,174 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addGap(106, 106, 106))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel1.setText("Amigos:");
+        JBregistrar.setBackground(new java.awt.Color(102, 153, 255));
+        JBregistrar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        JBregistrar.setForeground(new java.awt.Color(255, 255, 255));
+        JBregistrar.setText("Registrar");
+        JBregistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBregistrarActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel2.setText("Ferramentas:");
+        jTableEmprestimos.setBackground(new java.awt.Color(255, 255, 255));
+        jTableEmprestimos.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jTableEmprestimos.setForeground(new java.awt.Color(0, 0, 0));
+        jTableEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Amigo", "Ferramenta", "Data", "Data devolução"
+            }
+        ));
+        jTableEmprestimos.setToolTipText("");
+        jTableEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEmprestimosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableEmprestimos);
 
-        java.util.List<Ferramenta> listaFerramentas = new java.util.ArrayList<>();
-        listaFerramentas.add(new Ferramenta());
-        listaFerramentas.add(new Ferramenta());
-        listaFerramentas.add(new Ferramenta());
-        listaFerramentas.add(new Ferramenta());
-        listaFerramentas.add(new Ferramenta());
-        jListFerramentas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jListFerramentas.setModel(new javax.swing.AbstractListModel<Ferramenta>() {
-            public int getSize() { return listaFerramentas.size(); }
-            public Ferramenta getElementAt(int i) { return listaFerramentas.get(i); }
-        }
-    );
-    jScrollPane1.setViewportView(jListFerramentas);
+        JBalterar.setBackground(new java.awt.Color(102, 153, 255));
+        JBalterar.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+        JBalterar.setForeground(new java.awt.Color(255, 255, 255));
+        JBalterar.setText("Alterar");
+        JBalterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBalterarActionPerformed(evt);
+            }
+        });
 
-    java.util.List<Amigo> listaAmigos = new java.util.ArrayList<>();
-    listaAmigos.add(new Amigo());
-    listaAmigos.add(new Amigo());
-    listaAmigos.add(new Amigo());
-    listaAmigos.add(new Amigo());
-    jComboBoxAmigos.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-    jComboBoxAmigos.setModel(new javax.swing.DefaultComboBoxModel<>(listaAmigos.toArray(new Amigo[0])));
+        JBapagar.setBackground(new java.awt.Color(102, 153, 255));
+        JBapagar.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+        JBapagar.setForeground(new java.awt.Color(255, 255, 255));
+        JBapagar.setText("Apagar");
+        JBapagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBapagarActionPerformed(evt);
+            }
+        });
 
-    JBregistrar.setBackground(new java.awt.Color(102, 153, 255));
-    JBregistrar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-    JBregistrar.setForeground(new java.awt.Color(255, 255, 255));
-    JBregistrar.setText("Registrar");
-    JBregistrar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            JBregistrarActionPerformed(evt);
-        }
-    });
+        jLabel3.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jLabel3.setText("Data:");
 
-    jTableEmprestimos.setBackground(new java.awt.Color(255, 255, 255));
-    jTableEmprestimos.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    jTableEmprestimos.setForeground(new java.awt.Color(0, 0, 0));
-    jTableEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
-        new Object [][] {
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null}
-        },
-        new String [] {
-            "ID", "Amigo", "Ferramenta", "Data", "Data devolução"
-        }
-    ));
-    jTableEmprestimos.setToolTipText("");
-    jTableEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jTableEmprestimosMouseClicked(evt);
-        }
-    });
-    jScrollPane2.setViewportView(jTableEmprestimos);
+        jLabel5.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jLabel5.setText("ID Ferramenta:");
 
-    JBalterar.setBackground(new java.awt.Color(102, 153, 255));
-    JBalterar.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-    JBalterar.setForeground(new java.awt.Color(255, 255, 255));
-    JBalterar.setText("Alterar");
-    JBalterar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            JBalterarActionPerformed(evt);
-        }
-    });
+        JTFferramenta.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
 
-    JBapagar.setBackground(new java.awt.Color(102, 153, 255));
-    JBapagar.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-    JBapagar.setForeground(new java.awt.Color(255, 255, 255));
-    JBapagar.setText("Apagar");
-    JBapagar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            JBapagarActionPerformed(evt);
-        }
-    });
+        JTFamigo.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
 
-    jLabel3.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    jLabel3.setText("Data:");
+        jLabel6.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jLabel6.setText("ID Amigo:");
 
-    jLabel5.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    jLabel5.setText("ID Ferramenta:");
+        jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jLabel7.setText("Data Devolucao:");
 
-    JTFferramenta.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        JTFdata.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        JTFdata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFdataActionPerformed(evt);
+            }
+        });
 
-    JTFamigo.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        JTFdevolucao.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        JTFdevolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFdevolucaoActionPerformed(evt);
+            }
+        });
 
-    jLabel6.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    jLabel6.setText("ID Amigo:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JTFdata, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(JTFamigo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(151, 151, 151)
+                                        .addComponent(JTFferramenta, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(JTFdevolucao)))))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(JBregistrar)
+                        .addGap(262, 262, 262)
+                        .addComponent(JBapagar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBalterar)
+                        .addGap(20, 20, 20))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(JTFamigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(JTFferramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(JTFdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(JTFdevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBregistrar)
+                    .addComponent(JBapagar)
+                    .addComponent(JBalterar))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
 
-    jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    jLabel7.setText("Data Devolucao:");
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JPmenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-    JTFdata.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    JTFdata.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            JTFdataActionPerformed(evt);
-        }
-    });
-
-    JTFdevolucao.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-    JTFdevolucao.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            JTFdevolucaoActionPerformed(evt);
-        }
-    });
-
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(14, 14, 14)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBoxAmigos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(8, 8, 8)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(JBregistrar)
-                            .addGap(124, 124, 124)
-                            .addComponent(JBapagar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JBalterar)
-                            .addGap(30, 30, 30))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(54, 54, 54))
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(JTFferramenta))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(JTFdevolucao))))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(81, 81, 81)
-                            .addComponent(JTFdata)))
-                    .addGap(25, 25, 25))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(JTFamigo, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE))))
-    );
-    jPanel1Layout.setVerticalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(11, 11, 11)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1)
-                .addComponent(jComboBoxAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel2)
-            .addGap(18, 18, 18)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(22, 22, 22)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel6)
-                .addComponent(JTFamigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel5)
-                .addComponent(JTFferramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel3)
-                .addComponent(JTFdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(18, 18, 18)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel7)
-                .addComponent(JTFdevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(76, 76, 76)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(JBregistrar)
-                .addComponent(JBapagar)
-                .addComponent(JBalterar))
-            .addGap(34, 34, 34))
-    );
-
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(JPmenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addComponent(JPmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, 0)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-
-    pack();
-    setLocationRelativeTo(null);
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBsair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsair1ActionPerformed
@@ -386,32 +315,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_JPmenuMousePressed
 
     private void JBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBregistrarActionPerformed
-        try {
-            Amigo amigo = (Amigo) jComboBoxAmigos.getSelectedItem();
-            Ferramenta ferramenta = jListFerramentas.getSelectedValue();
-            Date dataEmprestimo = Date.valueOf(LocalDate.now());
-            Date dataDevolucao = null;
-
-            // Verifica se um amigo e uma ferramenta foram selecionados
-            if (amigo == null || ferramenta == null) {
-                throw new Mensagens("Selecione um amigo e uma ferramenta para registrar o empréstimo.");
-            }
-
-            // Cria um novo objeto de empréstimo com os valores selecionados
-            Emprestimo novoEmprestimo = new Emprestimo(amigo, ferramenta, dataEmprestimo, dataDevolucao);
-
-            // Chama o método do DAO para registrar o empréstimo
-            objetoemprestimo.registrarEmprestimo(novoEmprestimo);
-
-            // Atualiza a tabela com os novos dados
-            carregaTabela();
-
-
-        } catch (Mensagens erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } finally {
-            carregaTabela();
-        }
+        
     }//GEN-LAST:event_JBregistrarActionPerformed
 
     private void jTableEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmprestimosMouseClicked
@@ -427,48 +331,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableEmprestimosMouseClicked
 
     private void JBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBalterarActionPerformed
-        try {
-
-            int id = 0;
-            int idAmigo = 0;
-            int idFerramenta = 0;
-            String s = "devolvido";
-            Date dataEmprestimo;
-            Date dataDevolucao = Date.valueOf(s);
-
-            if (this.jTableEmprestimos.getSelectedRow() == -1) {
-                throw new Mensagens("Primeiro, selecione um empréstimo para editar.");
-            } else {
-                id = Integer.parseInt(this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 0).toString());
-            }
-
-            if (Integer.parseInt(this.JTFamigo.getText()) < 0 || Integer.parseInt(this.JTFferramenta.getText()) < 0) {
-                throw new Mensagens("ID deve ser um número positivo.");
-            } else {
-                idAmigo = Integer.parseInt(this.JTFamigo.getText());
-                idFerramenta = Integer.parseInt(this.JTFferramenta.getText());
-            }
-
-            if (this.JTFdata.getText().contains("_")) {
-                throw new Mensagens("Insira uma data de empréstimo válida.");
-            } else {
-                dataEmprestimo = Date.valueOf(LocalDate.now());;
-            }
-
-            if (!this.JTFdevolucao.getText().contains("_")) {
-                Date.valueOf(s);
-                if (dataEmprestimo.getTime() > dataDevolucao.getTime()) {
-                    throw new Mensagens("Data de empréstimo se encontra após data de devolução.");
-                }
-            }
-
-        } catch (Mensagens erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
-        } catch (NumberFormatException erro) {
-            JOptionPane.showMessageDialog(null, "Favor, informe os IDs necessários para alteração.", "Aviso", JOptionPane.WARNING_MESSAGE);
-        } finally {
-            carregaTabela();
-        }
+     
     }//GEN-LAST:event_JBalterarActionPerformed
 
     private void JTFdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFdataActionPerformed
@@ -544,17 +407,12 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTextField JTFdata;
     private javax.swing.JTextField JTFdevolucao;
     private javax.swing.JTextField JTFferramenta;
-    private javax.swing.JComboBox<Amigo> jComboBoxAmigos;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<Ferramenta> jListFerramentas;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableEmprestimos;
     // End of variables declaration//GEN-END:variables
