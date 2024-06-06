@@ -16,7 +16,6 @@ public class TelaFerramenta extends javax.swing.JFrame {
         initComponents();
         this.objetoferramenta = new FerramentaDAO();
         carregaTabela();
-        custoTotal();
     }
 
     public void carregaTabela() {
@@ -33,11 +32,13 @@ public class TelaFerramenta extends javax.swing.JFrame {
                 ferramenta.getMarca(),
                 ferramenta.getCusto(),});
         }
+        custoTotal();
     }
-    
-    private void custoTotal(){
-        String custoTotal = String.valueOf(objetoferramenta.getTotal());
-        this.JTFtotal.setText(custoTotal);
+
+    private void custoTotal() {
+        double custoTotal = objetoferramenta.getTotal();
+        String custoTotalFormatado = String.format("%.2f", custoTotal);
+        this.JTFtotal.setText(custoTotalFormatado);
     }
 
     @SuppressWarnings("unchecked")
