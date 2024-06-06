@@ -16,6 +16,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
         initComponents();
         this.objetoferramenta = new FerramentaDAO();
         carregaTabela();
+        custoTotal();
     }
 
     public void carregaTabela() {
@@ -32,6 +33,11 @@ public class TelaFerramenta extends javax.swing.JFrame {
                 ferramenta.getMarca(),
                 ferramenta.getCusto(),});
         }
+    }
+    
+    private void custoTotal(){
+        String custoTotal = String.valueOf(objetoferramenta.getTotal());
+        this.JTFtotal.setText(custoTotal);
     }
 
     @SuppressWarnings("unchecked")
@@ -54,7 +60,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableFerramenta = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        JTFtotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -190,9 +196,9 @@ public class TelaFerramenta extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Gasto Total:");
 
-        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("0");
+        JTFtotal.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        JTFtotal.setForeground(new java.awt.Color(0, 0, 0));
+        JTFtotal.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,7 +234,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(25, 25, 25))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(JTFtotal)
                                 .addGap(87, 87, 87))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -251,7 +257,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(JTFmarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(JTFtotal))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -486,12 +492,12 @@ public class TelaFerramenta extends javax.swing.JFrame {
     private javax.swing.JTextField JTFcusto;
     private javax.swing.JTextField JTFmarca;
     private javax.swing.JTextField JTFnome;
+    private javax.swing.JLabel JTFtotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableFerramenta;
