@@ -51,8 +51,17 @@ public class EmprestimoDAO {
         return minhaLista;
     }
 
-    public void registrarEmprestimo(Emprestimo emprestimo) {
-        String sql = "INSERT INTO tb_emprestimos (id_ferramenta, id_amigo, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
+    public boolean registrarEmprestimo(Emprestimo emprestimo) {
+
+        if (ferramentaDAO.isFerramentaEmprestada(emprestimo.getIdFerramenta().getId())) {
+            throw new RuntimeException("Esta ferramenta já está emprestada. Não é possível realizar um novo empréstimo.");
+        }
+
+        if (amigoPendente(emprestimo.getIdAmigo().getId(), emprestimo.getId()) != 0) {
+            throw new RuntimeException("O amigo já tem uma ferramenta emprestada e não devolveu.");
+        }
+
+        String sql = "INSERT INTO tb_emprestimos (id_amigo, id_ferramenta, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
 
@@ -64,8 +73,8 @@ public class EmprestimoDAO {
             stmt.execute();
             stmt.close();
 
-            stmt.execute();
-            stmt.close();
+            return true;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -105,6 +114,35 @@ public class EmprestimoDAO {
             throw new RuntimeException(erro);
         }
 
+    }
+
+    public int amigoPendente(int idAmigo, int idEmprestimo) {
+        int idFerramenta = 0;
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet pdt = stmt.executeQuery("SELECT id_ferramenta FROM `tb_emprestimos` WHERE `id_amigo` = " + idAmigo + " AND `data_devolucao` IS NULL AND `id` != " + idEmprestimo);
+
+            if (pdt.next()) {
+                idFerramenta = pdt.getInt("id_ferramenta");
+            }
+
+            stmt.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                this.getConexao().close();
+            } catch (Exception e) {
+            }
+            try {
+                this.getConexao().close();
+            } catch (Exception e) {
+            }
+        }
+
+        return idFerramenta;
     }
 
     public Emprestimo carregaEmprestimo(int id) {
