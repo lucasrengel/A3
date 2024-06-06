@@ -117,6 +117,40 @@ public class AmigoDAO {
         return objeto;
     }
 
+    public Amigo getAmigoComMaisEmprestimos() {
+        Amigo amigoComMaisEmprestimos = null;
+        int maxEmprestimos = 0;
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT id_amigo, COUNT(*) as total_emprestimos FROM tb_emprestimos GROUP BY id_amigo ORDER BY total_emprestimos DESC LIMIT 1");
+
+            if (res.next()) {
+                int idAmigo = res.getInt("id_amigo");
+                int totalEmprestimos = res.getInt("total_emprestimos");
+
+                amigoComMaisEmprestimos = carregaAmigo(idAmigo);
+                maxEmprestimos = totalEmprestimos;
+            }
+
+            stmt.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                this.getConexao().close();
+            } catch (Exception e) {
+            }
+        }
+
+        if (amigoComMaisEmprestimos != null) {
+            amigoComMaisEmprestimos.setTotalEmprestimos(maxEmprestimos);
+        }
+
+        return amigoComMaisEmprestimos;
+    }
+
     private Connection getConexao() {
         return Conexao.getConexao();
     }
