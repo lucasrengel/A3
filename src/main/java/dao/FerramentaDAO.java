@@ -146,6 +146,22 @@ public class FerramentaDAO {
         return objeto;
     }
 
+    public boolean isFerramentaEmprestada(int ferramentaId) {
+        try {
+            PreparedStatement stmt = this.getConexao().prepareStatement("SELECT COUNT(*) FROM tb_emprestimos WHERE id_ferramenta = ? AND data_devolucao IS NULL");
+            stmt.setInt(1, ferramentaId);
+            ResultSet res = stmt.executeQuery();
+
+            res.next();
+            int count = res.getInt(1);
+            
+            stmt.close();
+            return count > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private Connection getConexao() {
         return Conexao.getConexao();
     }
