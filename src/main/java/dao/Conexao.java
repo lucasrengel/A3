@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class Conexao {
 
+    //metodo para a conexao do banco de dados
     public static Connection getConexao() {
 
         Connection connection = null;//instancia da conexao
