@@ -13,6 +13,7 @@ public class FerramentaDAO {
     public static ArrayList<Ferramenta> minhaLista = new ArrayList<>();
     double custoTotal;
 
+    //retorna a lista de emprestimos
     public ArrayList getMinhaLista() {
 
         minhaLista.clear();
@@ -41,7 +42,7 @@ public class FerramentaDAO {
 
     }
 
-    //cadastra nova ferramenta
+    //cadastra nova ferramenta a partir de um objeto
     public boolean insertFerramentaBD(Ferramenta objeto) {
         String sql = "INSERT INTO tb_ferramentas(id,nome,marca,custo)VALUES(?,?,?,?)";
 
@@ -101,6 +102,7 @@ public class FerramentaDAO {
         }
     }
 
+    //retorna o custo total das ferramentas cadastradas
     public double getTotal() {
         ResultSet res;
 
@@ -146,6 +148,7 @@ public class FerramentaDAO {
         return objeto;
     }
 
+    //retorna se a ferramenta ja ta emprestada ou nao
     public boolean isFerramentaEmprestada(int ferramentaId) {
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement("SELECT COUNT(*) FROM tb_emprestimos WHERE id_ferramenta = ? AND data_devolucao IS NULL");
@@ -162,6 +165,7 @@ public class FerramentaDAO {
         }
     }
 
+    //metodo para se conectar com o banco de dados
     private Connection getConexao() {
         return Conexao.getConexao();
     }
