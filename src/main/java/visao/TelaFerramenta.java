@@ -165,11 +165,6 @@ public class TelaFerramenta extends javax.swing.JFrame {
         JTFnome.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
 
         JTFcusto.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-        JTFcusto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFcustoActionPerformed(evt);
-            }
-        });
 
         jTableFerramenta.setBackground(new java.awt.Color(255, 255, 255));
         jTableFerramenta.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
@@ -229,7 +224,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
                         .addComponent(JBapagar)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -434,10 +429,6 @@ public class TelaFerramenta extends javax.swing.JFrame {
             carregaTabela(); // atualiza a tabela.
         }
     }//GEN-LAST:event_JBcadastrarActionPerformed
-
-    private void JTFcustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFcustoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFcustoActionPerformed
 
     private void jTableFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFerramentaMouseClicked
         if (this.jTableFerramenta.getSelectedRow() != -1) {
