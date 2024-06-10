@@ -17,6 +17,7 @@ public class EmprestimoDAO {
     FerramentaDAO ferramentaDAO = new FerramentaDAO();
     public static ArrayList<Emprestimo> minhaLista = new ArrayList<>();
 
+    //retorna a lista de emprestimos
     public ArrayList getMinhaLista() {
 
         minhaLista.clear();
@@ -51,6 +52,7 @@ public class EmprestimoDAO {
         return minhaLista;
     }
 
+    //registra um emprestimo a partir do objeto criado
     public boolean registrarEmprestimo(Emprestimo emprestimo) {
 
         if (ferramentaDAO.isFerramentaEmprestada(emprestimo.getIdFerramenta().getId())) {
@@ -80,6 +82,7 @@ public class EmprestimoDAO {
         }
     }
 
+    //deleta um emprestimo pelo seu id
     public boolean deleteEmprestimoBD(int id) {
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -91,7 +94,8 @@ public class EmprestimoDAO {
 
         return true;
     }
-
+    
+    //altera um emprestimo pelo seu objeto
     public boolean updateEmprestimoBD(Emprestimo emprestimo) {
 
         String sql = "UPDATE tb_emprestimos set id_ferramenta = ? ,id_amigo = ? ,data_emprestimo = ?, data_devolucao = ? WHERE id = ?";
@@ -116,6 +120,7 @@ public class EmprestimoDAO {
 
     }
 
+    //retorna se o amigo tem uma ferramenta emprestada
     public int amigoPendente(int idAmigo, int idEmprestimo) {
         int idFerramenta = 0;
 
@@ -145,6 +150,7 @@ public class EmprestimoDAO {
         return idFerramenta;
     }
 
+    //retorna os emprestimos cadastrados
     public Emprestimo carregaEmprestimo(int id) {
 
         Emprestimo emprestimo = new Emprestimo();
@@ -167,6 +173,7 @@ public class EmprestimoDAO {
         return emprestimo;
     }
 
+    //metodo para se conectar ao banco de dados
     private Connection getConexao() {
         return Conexao.getConexao();
     }
