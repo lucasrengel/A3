@@ -39,7 +39,7 @@ public class AmigoDAO {
         return minhaLista;
     }
 
-    //cadastra um novo amigo
+    //cadastra um novo amigo com o objeto criado
     public boolean insertAmigoBD(Amigo objeto) {
         String sql = "INSERT INTO tb_amigos(id,nome,telefone) VALUES(?,?,?)";
 
@@ -73,7 +73,7 @@ public class AmigoDAO {
         return true;
     }
 
-    //atualiza um amigo pelo seu id
+    //atualiza um amigo com o objeto criado
     public boolean updateAmigoBD(Amigo objeto) {
 
         String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? WHERE id = ?";
@@ -116,7 +116,8 @@ public class AmigoDAO {
         }
         return objeto;
     }
-
+    
+    //retorna o amigo com mais emprestimos
     public Amigo getAmigoComMaisEmprestimos() {
         Amigo amigoComMaisEmprestimos = null;
         int maxEmprestimos = 0;
@@ -151,6 +152,7 @@ public class AmigoDAO {
         return amigoComMaisEmprestimos;
     }
 
+    //metodo para se conectar ao banco de dados
     private Connection getConexao() {
         return Conexao.getConexao();
     }
