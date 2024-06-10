@@ -214,18 +214,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jLabel7.setText("Data Devolucao:");
 
         JTFdata.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-        JTFdata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFdataActionPerformed(evt);
-            }
-        });
 
         JTFdevolucao.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-        JTFdevolucao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFdevolucaoActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -429,14 +419,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             carregaTabela(); // Atualiza a tabela
         }
     }//GEN-LAST:event_JBalterarActionPerformed
-
-    private void JTFdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFdataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFdataActionPerformed
-
-    private void JTFdevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFdevolucaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFdevolucaoActionPerformed
 
     private void JBapagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBapagarActionPerformed
 
