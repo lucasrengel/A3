@@ -5,22 +5,34 @@ Repositório criado com o intuito de abrigar as entregas para a A3 da UC Program
 ```
 Lucas Rengel
 RA: 10724110009
+User: lucasrengel
+Email: lucas_rengel@estudante.sc.senai.br
 
 ------------------------------------------------
 Antonio Victor Iaroseski Segala
 RA:1072417746
+User: antoniovsegala
+Email: antoniosegala023@gmail.com
 
 ------------------------------------------------
 Isadora Luchtenberg Fernandes
 RA:1072417018
+User: isaluch
+Email: Isadoraluch@gmail.com
 
 ------------------------------------------------
 Marcos Alexandre Pereira
 RA:1072418239
+User: marcosalexper
+Email: marcosalexper@hotmail.com
+
 
 ------------------------------------------------
 Pedro Emanuel Corrêa Jucas De Araújo
 RA:1072417508
+User: PedroEmanueL51027
+Email: brcpedroso5102@gmail.com
+
 ------------------------------------------------
 ```
 ### Requisitos Funcionais:
