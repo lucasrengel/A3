@@ -12,9 +12,11 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 import modelo.Emprestimo;
 
+
+/*Interface gráfica para gerenciamento de empréstimos de ferramentas, permitindo o registro, alteração e exclusão de empréstimos.*/
 public class TelaEmprestimo extends javax.swing.JFrame {
 
-    int xMouse, yMouse;
+    int xMouse, yMouse; //variaveis para permitir o manuseio da janela
     private AmigoDAO objetoamigo;
     private FerramentaDAO objetoferramenta;
     private EmprestimoDAO objetoemprestimo;
@@ -320,14 +322,14 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private void JBsair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsair1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBsair1ActionPerformed
-
+    //metodo para mudar a posicao da janela
     private void JPmenuMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
         setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_JPmenuMouseDragged
-
+    //metodo para mexer a janela
     private void JPmenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();

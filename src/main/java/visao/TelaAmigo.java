@@ -6,9 +6,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 
+/*A classe TelaAmigo é responsável por criar a interface gráfica para interação com dados de amigos.*/
 public class TelaAmigo extends javax.swing.JFrame {
 
-    private int xMouse, yMouse;
+    private int xMouse, yMouse; //variaveis para permitir o manuseio da janela
     private AmigoDAO objetoamigo;
 
     public TelaAmigo() {
@@ -242,14 +243,14 @@ public class TelaAmigo extends javax.swing.JFrame {
     private void JBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsairActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBsairActionPerformed
-
+    //metodo para mudar a posicao da janela
     private void JPmenuMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
         setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_JPmenuMouseDragged
-
+    //metodo para mexer a janela
     private void JPmenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();

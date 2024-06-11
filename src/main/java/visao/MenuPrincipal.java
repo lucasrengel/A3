@@ -1,8 +1,10 @@
 package visao;
 
+/*A classe MenuPrincipal cria a janela principal da aplicação com botões para acessar diferentes seções,
+permite a movimentação da janela sem bordas e inclui um botão para fechar a aplicação.*/
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    private int xMouse, yMouse;
+    private int xMouse, yMouse; //variaveis para permitir o manuseio da janela
 
     public MenuPrincipal() {
         initComponents();
@@ -172,14 +174,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void JBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_JBsairActionPerformed
-
+    //metodo para mudar a posicao da janela
     private void JPmenuMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
         setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_JPmenuMouseDragged
-
+    //metodo para mexer a janela
     private void JPmenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();

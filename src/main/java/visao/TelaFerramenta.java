@@ -6,9 +6,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ferramenta;
 
+/*Interface gráfica para cadastro, alteração e exclusão de ferramentas, com uma tabela para exibir os dados das ferramentas cadastradas. Permite também calcular o custo total das ferramentas cadastradas.*/
 public class TelaFerramenta extends javax.swing.JFrame {
 
-    private int xMouse, yMouse;
+    private int xMouse, yMouse; //variaveis para permitir o manuseio da janela
 
     private FerramentaDAO objetoferramenta;
 
@@ -290,14 +291,14 @@ public class TelaFerramenta extends javax.swing.JFrame {
     private void JBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsairActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBsairActionPerformed
-
+    //metodo para mudar a posicao da janela
     private void JPmenuMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
         setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_JPmenuMouseDragged
-
+    //metodo para mexer a janela
     private void JPmenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPmenuMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();
