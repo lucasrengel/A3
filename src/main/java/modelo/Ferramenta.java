@@ -1,5 +1,6 @@
 package modelo;
 
+// Classe que representa uma ferramenta, contendo informações como ID, nome, marca e custo.
 public class Ferramenta {
 
     private int id;

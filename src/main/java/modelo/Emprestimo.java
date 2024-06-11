@@ -2,6 +2,7 @@ package modelo;
 
 import java.sql.Date;
 
+// Classe que representa um empréstimo, associando um amigo a uma ferramenta, e contendo informações sobre as datas de empréstimo e devolução.
 public class Emprestimo {
 
     private int id;

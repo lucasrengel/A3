@@ -1,5 +1,6 @@
 package modelo;
 
+// Classe que representa um amigo, contendo informações pessoais como ID, nome, telefone e total de empréstimos realizados.
 public class Amigo {
 
     private int id;
