@@ -17,9 +17,9 @@ import modelo.Emprestimo;
 public class TelaEmprestimo extends javax.swing.JFrame {
 
     int xMouse, yMouse; //variaveis para permitir o manuseio da janela
-    private AmigoDAO objetoamigo;
-    private FerramentaDAO objetoferramenta;
-    private EmprestimoDAO objetoemprestimo;
+    private final AmigoDAO objetoamigo;
+    private final FerramentaDAO objetoferramenta;
+    private final EmprestimoDAO objetoemprestimo;
 
     public TelaEmprestimo() {
         initComponents();
@@ -30,7 +30,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         carregaTabela();
     }
 
-    public void carregaTabela() {
+    public final void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableEmprestimos.getModel();
         modelo.setNumRows(0);
 

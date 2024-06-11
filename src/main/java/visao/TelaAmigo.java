@@ -10,7 +10,7 @@ import modelo.Amigo;
 public class TelaAmigo extends javax.swing.JFrame {
 
     private int xMouse, yMouse; //variaveis para permitir o manuseio da janela
-    private AmigoDAO objetoamigo;
+    private final AmigoDAO objetoamigo;
 
     public TelaAmigo() {
         initComponents();
@@ -18,7 +18,7 @@ public class TelaAmigo extends javax.swing.JFrame {
         carregaTabela();
     }
 
-    public void carregaTabela() {
+    public final void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
         modelo.setNumRows(0);
 

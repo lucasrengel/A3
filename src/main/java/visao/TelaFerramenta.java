@@ -11,7 +11,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
 
     private int xMouse, yMouse; //variaveis para permitir o manuseio da janela
 
-    private FerramentaDAO objetoferramenta;
+    private final FerramentaDAO objetoferramenta;
 
     public TelaFerramenta() {
         initComponents();
@@ -19,7 +19,7 @@ public class TelaFerramenta extends javax.swing.JFrame {
         carregaTabela();
     }
 
-    public void carregaTabela() {
+    public final void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableFerramenta.getModel();
         modelo.setNumRows(0);
 
