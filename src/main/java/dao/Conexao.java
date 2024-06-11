@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// Classe responsável por gerenciar a conexão com o banco de dados MySQL.
 public class Conexao {
 
     //metodo para a conexao do banco de dados

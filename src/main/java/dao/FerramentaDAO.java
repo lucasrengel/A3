@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Ferramenta;
 
+/* Classe DAO (Data Access Object) para a entidade Ferramenta, 
+contendo métodos para realizar operações de CRUD no banco de dados e verificar se uma ferramenta está emprestada.*/
 public class FerramentaDAO {
 
     public static ArrayList<Ferramenta> minhaLista = new ArrayList<>();

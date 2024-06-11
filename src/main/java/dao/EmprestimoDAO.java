@@ -10,6 +10,8 @@ import modelo.Amigo;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
 
+/* Classe DAO (Data Access Object) para a entidade Emprestimo, 
+contendo métodos para realizar operações de CRUD no banco de dados e lógica de negócios para empréstimos.*/
 public class EmprestimoDAO {
 
     //transforma os IDs em objetos

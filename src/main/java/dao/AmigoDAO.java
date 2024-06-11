@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Amigo;
 
+// Classe DAO (Data Access Object) para a entidade Amigo, contendo métodos para realizar operações de CRUD no banco de dados.
 public class AmigoDAO {
 
     public static ArrayList<Amigo> minhaLista = new ArrayList<>();
