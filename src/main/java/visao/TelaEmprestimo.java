@@ -85,6 +85,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         JTFqtdemprestimos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setUndecorated(true);
         setResizable(false);
 
@@ -174,6 +176,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTableEmprestimos);
+        if (jTableEmprestimos.getColumnModel().getColumnCount() > 0) {
+            jTableEmprestimos.getColumnModel().getColumn(0).setMinWidth(40);
+            jTableEmprestimos.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTableEmprestimos.getColumnModel().getColumn(0).setMaxWidth(40);
+        }
 
         JBalterar.setBackground(new java.awt.Color(102, 153, 255));
         JBalterar.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
@@ -216,6 +223,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jLabel7.setText("Data Devolucao:");
 
         JTFdata.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        JTFdata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFdataActionPerformed(evt);
+            }
+        });
 
         JTFdevolucao.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
 
@@ -236,40 +248,42 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(JTFdata, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                                            .addComponent(JTFamigo))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel5)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFamigo, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTFferramenta)
-                                    .addComponent(JTFdevolucao, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JTFferramenta, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                    .addComponent(JTFdevolucao))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
                         .addComponent(JBregistrar)
-                        .addGap(262, 262, 262)
+                        .addGap(132, 132, 132)
                         .addComponent(JBapagar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBalterar)
-                        .addGap(20, 20, 20))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(52, 52, 52)
-                                .addComponent(JTFqtdemprestimos))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(JTFdata, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(137, 137, 137))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(261, 261, 261)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JTFqtdemprestimos)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,18 +300,22 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     .addComponent(JTFdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(JTFdevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(JTFqtdemprestimos))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBregistrar)
-                    .addComponent(JBapagar)
-                    .addComponent(JBalterar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JTFqtdemprestimos)
+                            .addComponent(jLabel1))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JBapagar)
+                            .addComponent(JBalterar)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(JBregistrar)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -374,8 +392,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void jTableEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmprestimosMouseClicked
         if (this.jTableEmprestimos.getSelectedRow() != -1) {
-            String id_amigo = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 1).toString();
-            String id_ferramenta = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 2).toString();
+            String id_amigo = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 0).toString();
+            String id_ferramenta = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 0).toString();
             String data = this.jTableEmprestimos.getValueAt(this.jTableEmprestimos.getSelectedRow(), 3).toString();
 
             this.JTFamigo.setText(id_amigo);
@@ -402,7 +420,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     throw new ParseException("Data de empréstimo posterior à data de devolução", 0);
                 }
             }
-
             Emprestimo emprestimo = new Emprestimo();
             emprestimo.setId(id);
             emprestimo.setIdAmigo(objetoamigo.carregaAmigo(idAmigo));
@@ -446,6 +463,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             carregaTabela();
         }
     }//GEN-LAST:event_JBapagarActionPerformed
+
+    private void JTFdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFdataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFdataActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
